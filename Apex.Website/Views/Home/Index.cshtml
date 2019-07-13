@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+@*
+	<script type="text/javascript">
+
+		$(function () {
+
+			var formDataToken = {
+				grant_type: 'password',
+				username: "test001@test.com",
+				password: "_aA12345"
+			}
+
+			$.ajax({
+				url: 'http://localhost:8094/token',
+				type: 'POST',
+				dataType: 'json',
+				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+				data: formDataToken,
+				success: function (data) {
+					console.log("data");
+					console.log(data);
+				},
+				error: function (errorData) {
+					console.log("errorData");
+					console.log(errorData);
+					console.log(errorData.responseText);
+				}
+			});
+
+			var formDataRegister = {
+				Email: "test001@test.com",
+				Password: "_aA12345",
+				ConfirmPassword: "_aA12345"
+			};
+
+			$.ajax({
+				url: 'http://localhost:8094/api/account/register',
+				type: 'POST',
+				dataType: 'json',
+				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+				data: formDataRegister,
+				success: function (data) {
+					console.log("data");
+					console.log(data);
+				},
+				error: function (errorData) {
+					console.log("errorData");
+					console.log(errorData);
+				}
+			});
+
+		});
+	</script>
+*@
+
+

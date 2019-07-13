@@ -1,0 +1,85 @@
+﻿@model PagedList.IPagedList<Apex.Domain.DBModels.User>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm(null, null, FormMethod.Get, new { id = "formUserIndexSearch" }))
+{
+    <div style="clear:both; padding-bottom:10px;">
+        Find: @Html.TextBox("SearchString", ViewBag.searchString as string)
+        <input type="submit" value="Search" />
+    </div>
+}
+
+<table style="width:100%;">
+    <tr style="background-color:lightblue;">
+        <th style="width:150px;">
+            @Html.ActionLink("First Name", "Index", new { sortOrder = "FirstName", searchString = ViewBag.searchString })
+        </th>
+        <th style="width:150px;">
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = "LastName", searchString = ViewBag.searchString })
+        </th>
+        <th style="width:220px;">
+            Address
+        </th>
+        <th>
+            @Html.ActionLink("Email", "Index", new { sortOrder = "Email", searchString = ViewBag.searchString })
+        </th>
+        <th>
+            Mobile
+        </th>
+        <th>
+            Home Phone
+        </th>
+        <th style="width:130px;">
+            &nbsp;
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+                @if (Html.DisplayFor(modelItem => item.Address).ToString().Length > 0)
+                { <text>,</text> }
+                @Html.DisplayFor(modelItem => item.City)
+                @Html.DisplayFor(modelItem => item.Province)
+                @Html.DisplayFor(modelItem => item.Zip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HomePhone)
+            </td>
+            <td style="text-align:right;">
+                @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
+            </td>
+        </tr>
+    }
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+<div class="redirectToTabUsers">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.sortOrder, searchString = ViewBag.searchString }))
+</div>
